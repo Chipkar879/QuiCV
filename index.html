@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuiCV</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Left Side Form -->
+    <div class="form-section">
+
+      <h1>QuiCV Resume Builder</h1>
+
+      <input type="text" id="name" placeholder="Enter Full Name">
+
+      <input type="email" id="email" placeholder="Enter Email">
+
+      <input type="text" id="phone" placeholder="Enter Phone Number">
+
+      <textarea id="skills" placeholder="Enter Skills"></textarea>
+
+      <textarea id="education" placeholder="Enter Education"></textarea>
+
+      <textarea id="experience" placeholder="Enter Experience"></textarea>
+
+      <button onclick="generateResume()">
+        Generate Resume
+      </button>
+
+    </div>
+
+    <!-- Right Side Resume Preview -->
+    <div class="resume-section">
+
+      <div id="resume-output">
+
+        <h2>Your Resume Preview</h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
