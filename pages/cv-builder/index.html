@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuiCV | Professional Resume Builder</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%234f46e5'>Q</text></svg>">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    
+    <!-- Left Side: Input Form -->
+    <div class="form-section">
+      <div class="header">
+        <i class="fa-solid fa-q"></i>
+        <h1>QuiCV Builder</h1>
+      </div>
+      <p class="subtitle">Fill in the details below to generate your professional resume.</p>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-user"></i> Full Name</label>
+        <input type="text" id="name" placeholder="e.g. John Doe">
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+        <input type="email" id="email" placeholder="e.g. john@example.com">
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+        <input type="text" id="phone" placeholder="e.g. +1 234 567 890">
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-code"></i> Skills</label>
+        <input type="text" id="skills" placeholder="e.g. HTML, CSS, JavaScript, React">
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-graduation-cap"></i> Education</label>
+        <textarea id="education" placeholder="Degree, University, Year"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fa-solid fa-briefcase"></i> Experience</label>
+        <textarea id="experience" placeholder="Job Title, Company, Dates, Description"></textarea>
+      </div>
+
+      <button onclick="generateResume()" class="btn-generate">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Resume
+      </button>
+    </div>
+
+    <!-- Right Side: Resume Preview -->
+    <div class="resume-section">
+      <div class="resume-controls">
+        <button onclick="window.print()" class="btn-print">
+          <i class="fa-solid fa-print"></i> Print / PDF
+        </button>
+      </div>
+      
+      <div class="paper" id="resume-output">
+        <div class="preview-placeholder">
+          <i class="fa-solid fa-file-lines"></i>
+          <p>Your resume preview will appear here...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>
