@@ -38,39 +38,96 @@
       </div>
       <p class="subtitle">Fill in the details below to generate your professional resume.</p>
 
-      <div class="form-group">
-        <label><i class="fa-solid fa-user"></i> Full Name</label>
-        <input type="text" id="name" placeholder="e.g. John Doe">
+      <!-- Progress Steps -->
+      <div class="progress-steps">
+        <div class="step active" id="step1-indicator">
+          <span class="step-number">1</span>
+          <span class="step-label">Personal</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step2-indicator">
+          <span class="step-number">2</span>
+          <span class="step-label">Professional</span>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label><i class="fa-solid fa-envelope"></i> Email Address</label>
-        <input type="email" id="email" placeholder="e.g. john@example.com">
+      <!-- SECTION 1: Personal Details -->
+      <div class="form-step active" id="step1">
+        <div class="form-section-title">
+          <span>01</span> Personal Details
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-user"></i> Full Name *</label>
+          <input type="text" id="name" placeholder="e.g. John Doe" oninput="validateStep1()">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+          <input type="text" id="phone" placeholder="e.g. +1 234 567 890" oninput="validateStep1()">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope"></i> Professional Email</label>
+          <input type="email" id="email" placeholder="e.g. john@company.com" oninput="validateStep1()">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-location-dot"></i> Location</label>
+          <input type="text" id="location" placeholder="e.g. New York, USA" oninput="validateStep1()">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</label>
+          <input type="text" id="linkedin" placeholder="e.g. linkedin.com/in/johndoe" oninput="validateStep1()">
+        </div>
+
+        <button type="button" class="btn-next" id="btnNext" onclick="goToStep2()" disabled>
+          Next Step <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
 
-      <div class="form-group">
-        <label><i class="fa-solid fa-phone"></i> Phone Number</label>
-        <input type="text" id="phone" placeholder="e.g. +1 234 567 890">
+      <!-- SECTION 2: Professional Info -->
+      <div class="form-step" id="step2">
+        <div class="form-section-title">
+          <span>02</span> Professional Info
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-user-tie"></i> Professional Summary</label>
+          <textarea id="summary" placeholder="A brief 3-4 sentence paragraph highlighting your top skills..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-briefcase"></i> Work Experience</label>
+          <textarea id="experience" placeholder="Company Name, Job Title&#10;Employment Dates&#10;• Key achievements with metrics"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-graduation-cap"></i> Education</label>
+          <textarea id="education" placeholder="Degree, University, Year&#10;GPA (optional)&#10;Dissertation topic (optional)"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-code"></i> Skills</label>
+          <textarea id="skills" placeholder="Hard Skills: HTML, CSS, JavaScript&#10;Soft Skills: Leadership, Communication"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-plus"></i> Additional Sections</label>
+          <textarea id="additional" placeholder="Certifications, Licenses, Volunteer Experience, Publications, Associations"></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn-back" onclick="goToStep1()">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="btn-generate" id="btnGenerate" onclick="generateResume()" disabled>
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Resume
+          </button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label><i class="fa-solid fa-code"></i> Skills</label>
-        <input type="text" id="skills" placeholder="e.g. HTML, CSS, JavaScript, React">
-      </div>
-
-      <div class="form-group">
-        <label><i class="fa-solid fa-graduation-cap"></i> Education</label>
-        <textarea id="education" placeholder="Degree, University, Year"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label><i class="fa-solid fa-briefcase"></i> Experience</label>
-        <textarea id="experience" placeholder="Job Title, Company, Dates, Description"></textarea>
-      </div>
-
-      <button onclick="generateResume()" class="btn-generate">
-        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Resume
-      </button>
     </div>
 
     <!-- Right Side: Resume Preview -->

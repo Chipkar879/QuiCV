@@ -31,13 +31,12 @@ body {
 /* --- NAVIGATION --- */
 nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* Key: Space between logo and links */
   padding: 25px 50px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  animation: fadeInDown 0.8s ease;
 }
 
 .logo {
@@ -54,7 +53,10 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 40px; /* Gap between links */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Perfectly center */
 }
 
 .nav-links a {
@@ -62,20 +64,12 @@ nav {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
+  font-size: 1rem;
 }
 
-.nav-links a:hover { color: white; }
-
-.btn-login {
-  padding: 10px 25px;
-  border: 1px solid var(--text-gray);
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
+.nav-links a:hover { 
+  color: white; 
 }
-
-.btn-login:hover { background: white; color: var(--bg); }
 
 /* --- HERO SECTION --- */
 .hero {
@@ -227,6 +221,8 @@ footer {
 @media (max-width: 768px) {
   .hero h1 { font-size: 2.5rem; }
   .features { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
+  .nav-links { 
+    display: none; 
+  }
   .cta-buttons { flex-direction: column; }
 }
