@@ -1,5 +1,60 @@
-// Track current step
+// ========================
+// GLOBAL VARIABLES
+// ========================
 let currentStep = 1;
+let userPhoto = null;
+
+// ========================
+// PHOTO FUNCTIONS
+// ========================
+
+// Function to preview photo
+function previewPhoto(event) {
+  const file = event.target.files[0];
+  if (file) {
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Photo size must be less than 2MB!");
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      userPhoto = e.target.result;
+      
+      // Show preview
+      const preview = document.getElementById('photoPreview');
+      preview.innerHTML = `<img src="${userPhoto}" alt="Profile Photo">`;
+      preview.classList.add('has-photo');
+      
+      // Show remove button
+      document.getElementById('btnRemovePhoto').style.display = 'flex';
+      
+      // Validate step
+      validateStep1();
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Function to remove photo
+function removePhoto() {
+  userPhoto = null;
+  
+  // Reset preview
+  const preview = document.getElementById('photoPreview');
+  preview.innerHTML = `<i class="fa-solid fa-user"></i>`;
+  preview.classList.remove('has-photo');
+  
+  // Hide remove button
+  document.getElementById('btnRemovePhoto').style.display = 'none';
+  
+  // Reset file input
+  document.getElementById('photo').value = '';
+  
+  // Validate step
+  validateStep1();
+}
 
 // ========================
 // STEP VALIDATION
@@ -10,8 +65,6 @@ function validateStep1() {
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const email = document.getElementById("email").value.trim();
-  const location = document.getElementById("location").value.trim();
-  const linkedin = document.getElementById("linkedin").value.trim();
 
   const btnNext = document.getElementById("btnNext");
   const step1Indicator = document.getElementById("step1-indicator");
@@ -74,8 +127,6 @@ function generateResume() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const email = document.getElementById("email").value;
-  const location = document.getElementById("location").value;
-  const linkedin = document.getElementById("linkedin").value;
 
   // SECTION 2: Professional Info
   const summary = document.getElementById("summary").value;
@@ -98,18 +149,22 @@ function generateResume() {
   let resumeHTML = '';
 
   // ========================
+  // PHOTO HTML (Common for all templates)
+  // ========================
+  const photoHTML = userPhoto ? `<div class="resume-photo"><img src="${userPhoto}" alt="${name}"></div>` : '';
+
+  // ========================
   // TEMPLATE 1: MODERN (Default)
   // ========================
   if (template === 'default' || template === 'modern') {
     resumeHTML = `
       <div class="resume-modern">
+        ${photoHTML}
         <div class="modern-header">
           <h1>${name}</h1>
           <div class="modern-contact">
             <span><i class="fa-solid fa-phone"></i> ${phone || 'Not provided'}</span>
             <span><i class="fa-solid fa-envelope"></i> ${email || 'Not provided'}</span>
-            <span><i class="fa-solid fa-location-dot"></i> ${location || 'Not provided'}</span>
-            ${linkedin ? `<span><i class="fa-brands fa-linkedin"></i> ${linkedin}</span>` : ''}
           </div>
         </div>
 
@@ -157,11 +212,11 @@ function generateResume() {
   else if (template === 'classic') {
     resumeHTML = `
       <div class="resume-classic">
+        ${photoHTML}
         <div class="classic-header">
           <h1>${name}</h1>
           <div class="classic-contact">
-            ${phone || 'No phone'} | ${email || 'No email'} | ${location || 'No location'}
-            ${linkedin ? ` | ${linkedin}` : ''}
+            ${phone || 'No phone'} | ${email || 'No email'}
           </div>
         </div>
         <hr class="classic-divider">
@@ -211,13 +266,11 @@ function generateResume() {
     resumeHTML = `
       <div class="resume-creative">
         <div class="creative-sidebar">
-          <div class="avatar">${name.charAt(0)}</div>
+          <div class="avatar">${userPhoto ? `<img src="${userPhoto}" alt="Photo">` : name.charAt(0)}</div>
           <h1>${name}</h1>
           <div class="creative-contact">
             <p><i class="fa-solid fa-phone"></i> ${phone || 'N/A'}</p>
             <p><i class="fa-solid fa-envelope"></i> ${email || 'N/A'}</p>
-            <p><i class="fa-solid fa-location-dot"></i> ${location || 'N/A'}</p>
-            ${linkedin ? `<p><i class="fa-brands fa-linkedin"></i> ${linkedin}</p>` : ''}
           </div>
         </div>
         <div class="creative-main">
@@ -266,10 +319,10 @@ function generateResume() {
   else if (template === 'minimal') {
     resumeHTML = `
       <div class="resume-minimal">
+        ${photoHTML}
         <h1>${name}</h1>
         <p class="minimal-contact">
-          ${phone || ''} &nbsp;&bull;&nbsp; ${email || ''} &nbsp;&bull;&nbsp; ${location || ''}
-          ${linkedin ? `&nbsp;&bull;&nbsp; ${linkedin}` : ''}
+          ${phone || ''} &nbsp;&bull;&nbsp; ${email || ''}
         </p>
         
         <hr class="minimal-line">
@@ -318,10 +371,11 @@ function generateResume() {
   else if (template === 'professional') {
     resumeHTML = `
       <div class="resume-professional">
+        ${photoHTML}
         <div class="pro-header">
           <div class="pro-bar"></div>
           <h1>${name}</h1>
-          <p>${phone || ''} &nbsp;|&nbsp; ${email || ''} &nbsp;|&nbsp; ${location || ''}</p>
+          <p>${phone || ''} &nbsp;|&nbsp; ${email || ''}</p>
         </div>
         
         ${summary ? `
@@ -373,9 +427,7 @@ function generateResume() {
           <p class="exec-title">Executive Profile</p>
           <p class="exec-contact">
             <span>${phone || ''}</span> &nbsp;|&nbsp; 
-            <span>${email || ''}</span> &nbsp;|&nbsp; 
-            <span>${location || ''}</span>
-            ${linkedin ? `&nbsp;|&nbsp; <span>${linkedin}</span>` : ''}
+            <span>${email || ''}</span>
           </p>
         </div>
         
@@ -432,27 +484,6 @@ function generateResume() {
     }, 50);
   }, 300);
 }
-
-// ========================
-// ENTER KEY SUPPORT
-// ========================
-document.addEventListener('DOMContentLoaded', function() {
-  const inputs = document.querySelectorAll('input, textarea');
-  
-  inputs.forEach(input => {
-    input.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        
-        if (currentStep === 1) {
-          goToStep2();
-        } else {
-          generateResume();
-        }
-      }
-    });
-  });
-});
 
 // ========================
 // PAGE LOAD ANIMATION

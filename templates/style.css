@@ -28,38 +28,31 @@ body {
 }
 
 /* --- NAVIGATION --- */
+
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 50px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Aligns items to the left, but sets a base for our absolute centering */
+    align-items: center;
+    padding: 15px;
+    position: relative; /* Essential: creates a boundary for the absolute child */
 }
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  text-decoration: none;
-}
-
-.logo i { color: var(--primary); }
 
 .nav-links {
-  display: flex;
-  gap: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    
+    /* The Magic Trick: Absolute center */
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/* Optional: Clean up default link styling */
 .nav-links a {
-  color: var(--text-gray);
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
 }
 
 .nav-links a:hover { color: white; }

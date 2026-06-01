@@ -57,6 +57,25 @@
           <span>01</span> Personal Details
         </div>
 
+        <!-- Photo Upload -->
+        <div class="form-group">
+          <label><i class="fa-solid fa-camera"></i> Profile Photo</label>
+          <div class="photo-upload">
+            <div class="photo-preview" id="photoPreview">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <input type="file" id="photo" accept="image/*" onchange="previewPhoto(event)">
+            <div class="photo-buttons">
+              <label for="photo" class="btn-upload-photo">
+                <i class="fa-solid fa-upload"></i> Upload Photo
+              </label>
+              <button type="button" class="btn-remove-photo" id="btnRemovePhoto" onclick="removePhoto()" style="display: none;">
+                <i class="fa-solid fa-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label><i class="fa-solid fa-user"></i> Full Name *</label>
           <input type="text" id="name" placeholder="e.g. John Doe" oninput="validateStep1()">
@@ -70,16 +89,6 @@
         <div class="form-group">
           <label><i class="fa-solid fa-envelope"></i> Professional Email</label>
           <input type="email" id="email" placeholder="e.g. john@company.com" oninput="validateStep1()">
-        </div>
-
-        <div class="form-group">
-          <label><i class="fa-solid fa-location-dot"></i> Location</label>
-          <input type="text" id="location" placeholder="e.g. New York, USA" oninput="validateStep1()">
-        </div>
-
-        <div class="form-group">
-          <label><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</label>
-          <input type="text" id="linkedin" placeholder="e.g. linkedin.com/in/johndoe" oninput="validateStep1()">
         </div>
 
         <button type="button" class="btn-next" id="btnNext" onclick="goToStep2()" disabled>
